@@ -1,0 +1,24 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django_cms = "*"
+django_filer = "*"
+django_mptt = "*"
+psycopg2 = "*"
+djangocms-text-ckeditor = "*"
+djangocms-link = "*"
+djangocms-file = "*"
+djangocms-picture = "*"
+djangocms-video = "*"
+djangocms-googlemap = "*"
+djangocms-snippet = "*"
+djangocms-style = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
+python_full_version = "3.11.5"

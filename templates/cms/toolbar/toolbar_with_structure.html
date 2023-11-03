@@ -1,0 +1,6 @@
+{% extends "cms/toolbar/toolbar_with_structure.html" %}
+
+{% block toolbar_bottom %}
+{{ block.super }}
+{% include "cms_layout/cms_layout_form.html" %}
+{% endblock toolbar_bottom %}

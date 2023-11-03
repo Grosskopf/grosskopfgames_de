@@ -1,0 +1,60 @@
+{% load cms_tags sekizai_tags %}
+<html>
+    <head>
+        <title>{% page_attribute "page_title" %}</title>
+        {% render_block "css" %}
+        {% block "head" %}{% endblock "head" %}
+        <style>
+            .cms-reset div.cms-layout {
+                width: 416px;
+                right: 0;
+                display: none;
+                position: fixed;
+                top: 0;
+                overflow: hidden;
+                z-index: 9999;
+                height: 100%;
+                background: var(--dca-gray-super-lightest);
+            }
+            .cms-reset div.cms-layout div.cms-layout-content {
+                position: relative;
+                overflow-y: scroll;
+                top: 0;
+                left: 0;
+                padding: 46px 5%;
+                z-index: 100;
+                width: 100%;
+                height: 100%;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                user-select: none;
+                transform: translateZ(0);
+                -webkit-overflow-scrolling: touch;
+            }
+            .cms-reset div.cms-layout div.cms-layout-content button {
+                font-size: 40px;
+            }
+        </style>
+    </head>
+    <body>
+        {% cms_toolbar %}
+        {% block "body" %}{% placeholder "content" %}{% endblock "body" %}
+        {% render_block "js" %}
+        {% if request.toolbar and request.toolbar.edit_mode_active %}
+        <script>
+            function _switch_layout(e) {
+                for (_class_name of this.classList){
+                    if (_class_name.startsWith('cms-plugin-')) {
+                        let number = _class_name.substring(11)
+                        if(!isNaN(number)){
+                            CMS.$('.cms-layout').css({'display': 'block'})
+                            CMS.$('#cms-layout-form').attr('action', '{% url 'update_css' pk=1 %}'.replace('/1/', '/'+ number + '/?cms_path={{request.path}}'))
+                        }
+                    }
+                }
+            };
+            CMS.$(document).on('click.cms.plugin', '.cms-plugin:not([class*=cms-render-model])',_switch_layout);
+        </script>
+        {% endif %}
+    </body>
+</html>

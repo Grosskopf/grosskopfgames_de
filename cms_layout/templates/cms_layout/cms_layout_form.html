@@ -1,0 +1,44 @@
+{% load static i18n %}
+<div class="cms-layout">
+    <div class="cms-layout-content">
+        <form id="cms-layout-form" method="post" action="/admin/cms/page/edit-plugin/x/?cms_path={{ request.path }}">
+            {% csrf_token %}
+            <input type="hidden" id="css__key" name="css__key" value="float">
+            <input type="hidden" id="css__value" name="css__value" value="left">
+            
+        </form>
+        <script>
+            function cmsUpdateCSS(key, value) {
+                document.getElementById('css__key').value=key
+                document.getElementById('css__value').value=value
+                document.getElementById('cms-layout-form').submit()
+            }
+        </script>
+        <div style="display: flex; flex-direction: column; gap: 0.5em; align-items: center">
+            <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+                <button onclick="cmsUpdateCSS('float', 'left')">⬑</button>
+                <button onclick="cmsUpdateCSS('float', 'none')">↔</button>
+                <button onclick="cmsUpdateCSS('float', 'right')">⬏</button>
+            </div>
+            <img src="{% static 'cms_layout/marginbox.svg' %}" style="max-width: 70%; background: white; padding: 1em; border-radius: 1em">
+            <div style="display: flex; flex-direction: row; flex-wrap: wrap; border-radius: 0.2em; padding: 0.2em; background: white; color: black">
+                <label for="width" style="color: black">{% trans 'width' %}</label><input id="width"/>
+            </div>
+            <div style="display: flex; flex-direction: row; flex-wrap: wrap; border-radius: 0.2em; padding: 0.2em; background: white; color: black">
+                <label for="height" style="color: black">{% trans 'height' %}</label><input id="height"/>
+            </div>
+            <div style="display: flex; flex-direction: row; flex-wrap: wrap; border-radius: 0.2em; padding: 0.2em; background: white; color: black">
+                <label for="border_radius" style="color: black">{% trans 'border-radius' %}</label><input id="border_radius"/>
+            </div>
+            <div style="display: flex; flex-direction: row; flex-wrap: wrap; border-radius: 0.2em; padding: 0.2em; background: white; color: black">
+                <label for="margin" style="color: black">{% trans 'margin' %}</label><input id="margin"/>
+            </div>
+            <div style="display: flex; flex-direction: row; flex-wrap: wrap; border-radius: 0.2em; padding: 0.2em; background: white; color: black">
+                <label for="border" style="color: black">{% trans 'border' %}</label><input id="border"/>
+            </div>
+            <div style="display: flex; flex-direction: row; flex-wrap: wrap; border-radius: 0.2em; padding: 0.2em; background: white; color: black">
+                <label for="padding" style="color: black">{% trans 'padding' %}</label><input id="padding"/>
+            </div>
+        </div>u
+    </div>
+</div>
